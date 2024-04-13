@@ -1,10 +1,7 @@
 const { Router } = require("express");
-const Todo = require("../models/todo");
-
 const router = Router();
+const { getAllTodos } = require("../controllers/controllers");
 
-router.get("/todos", (req, res) => {
-  res.send();
-});
+router.get("/", getAllTodos);
 
 module.exports = router;

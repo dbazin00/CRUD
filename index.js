@@ -6,7 +6,7 @@ const app = express();
 
 const { PORT } = process.env;
 
-app.use("/api", routes);
+app.use("/api/todos", routes);
 
 app.listen(PORT, () =>
   console.log(`App running on http://localhost:${PORT}/api`)
