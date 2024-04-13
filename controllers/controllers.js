@@ -11,4 +11,12 @@ const getAllTodos = async (req, res) => {
   res.send({ res: allTodos });
 };
 
-module.exports = { getAllTodos };
+const getTodoById = async (req, res) => {
+  const { id } = req.params;
+
+  Todo.findByPk(id)
+    .then((todoById) => res.send(todoById))
+    .catch(() => res.send(`User with id: ${id} not found!`));
+};
+
+module.exports = { getAllTodos, getTodoById };
