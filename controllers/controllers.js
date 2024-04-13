@@ -11,7 +11,7 @@ const getAllTodos = async (req, res) => {
   res.send({ res: allTodos });
 };
 
-const getTodoById = async (req, res) => {
+const getTodoById = (req, res) => {
   const { id } = req.params;
 
   Todo.findByPk(id)
