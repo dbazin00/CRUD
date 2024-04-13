@@ -1,14 +1,14 @@
 const Todo = require("../models/todo");
 
-const getAllTodos = async (req, res) => {
+const getAllTodos = (req, res) => {
   const sortOptions = ["DESC", "ASC"];
   const { sort } = req.query;
 
-  const allTodos = await Todo.findAll({
+  Todo.findAll({
     order: [["createdAt", sortOptions[Number(sort === "ASC")]]],
-  });
-
-  res.send({ res: allTodos });
+  })
+    .then((result) => res.send(result))
+    .catch((reject) => res.send(reject));
 };
 
 const getTodoById = (req, res) => {
