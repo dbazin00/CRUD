@@ -19,4 +19,10 @@ const getTodoById = (req, res) => {
     .catch(() => res.send(`User with id: ${id} not found!`));
 };
 
-module.exports = { getAllTodos, getTodoById };
+const addNewTodo = (req, res) => {
+  Todo.create(req.body)
+    .then((result) => res.send(result))
+    .catch((reject) => res.send(reject));
+};
+
+module.exports = { getAllTodos, getTodoById, addNewTodo };
