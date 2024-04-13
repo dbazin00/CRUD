@@ -25,4 +25,21 @@ const addNewTodo = (req, res) => {
     .catch((reject) => res.send(reject));
 };
 
-module.exports = { getAllTodos, getTodoById, addNewTodo };
+const updateTodoById = async (req, res) => {
+  const { id } = req.params;
+  const { done, text } = req.body;
+
+  Todo.findByPk(id)
+    .then((todoById) => (todoById = todoById.dataValues))
+    .then((todoById) =>
+      Todo.update({ done, text }, { where: { id: id } })
+        .then(() => {
+          if (done && done !== todoById.done) console.log("Send SMS");
+        })
+        .then(() => res.send())
+        .catch((reject) => res.send(reject))
+    )
+    .catch(() => res.send(`User with id: ${id} not found!`));
+};
+
+module.exports = { getAllTodos, getTodoById, addNewTodo, updateTodoById };
