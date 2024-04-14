@@ -47,7 +47,7 @@ You need to have installed Postman or similar tool for testing following API rou
 ```
 
 - `GET /api/todos/:id` - HTTP GET request which returns a todo that matches `:id`. If it does not match any of ids in database, request will return message that todo with that id does not exist
-- `PATCH /api/todos/:id` - HTTP PATCH request which updates a todo that matches `:id`. If it does not match any of ids in database, request will return message that todo with that id does not exist. You can update only _text_ or _done_ or both fields while _updatedAt_ will be automatically updated. **All other fields are not allowed to be updated!**. If _done_ filed is being updated to thruthy value if it is different from previous version, SMS will be sent to number specified in `.env` file. This is an example of HTTP request body:
+- `PATCH /api/todos/:id` - HTTP PATCH request which updates a todo that matches `:id`. If it does not match any of ids in database, request will return message that todo with that id does not exist. You can update only _text_ or _done_ or both fields while _updatedAt_ will be automatically updated. **All other fields are not allowed to be updated!**. If _done_ filed is being updated to thruty value if it is different from previous version, SMS will be sent to number specified in `.env` file. This is an example of HTTP request body:
 
 ```
 {
