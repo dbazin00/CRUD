@@ -74,4 +74,22 @@ const updateTodoById = async (req, res) => {
     .catch(() => res.send(`User with id: ${id} not found!`));
 };
 
-module.exports = { getAllTodos, getTodoById, addNewTodo, updateTodoById };
+const deleteTodoById = (req, res) => {
+  const { id } = req.params;
+
+  Todo.destroy({
+    where: {
+      id,
+    },
+  })
+    .then(() => res.send(`User with id: ${id} deleted!`))
+    .catch(() => res.send(`User with id: ${id} not found!`));
+};
+
+module.exports = {
+  getAllTodos,
+  getTodoById,
+  addNewTodo,
+  updateTodoById,
+  deleteTodoById,
+};
