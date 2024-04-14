@@ -22,7 +22,7 @@ const getTodoById = (req, res) => {
 
   Todo.findByPk(id)
     .then((todoById) => res.send(todoById))
-    .catch(() => res.send(`User with id: ${id} not found!`));
+    .catch(() => res.send(`Todo with id: ${id} not found!`));
 };
 
 const addNewTodo = (req, res) => {
@@ -71,7 +71,7 @@ const updateTodoById = async (req, res) => {
         .then(() => res.send())
         .catch((reject) => res.send(reject))
     )
-    .catch(() => res.send(`User with id: ${id} not found!`));
+    .catch(() => res.send(`Todo with id: ${id} not found!`));
 };
 
 const deleteTodoById = (req, res) => {
@@ -82,8 +82,8 @@ const deleteTodoById = (req, res) => {
       id,
     },
   })
-    .then(() => res.send(`User with id: ${id} deleted!`))
-    .catch(() => res.send(`User with id: ${id} not found!`));
+    .then(() => res.send(`Todo with id: ${id} deleted!`))
+    .catch(() => res.send(`Todo with id: ${id} not found!`));
 };
 
 module.exports = {
