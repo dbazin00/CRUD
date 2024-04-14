@@ -1,4 +1,10 @@
 const Todo = require("../models/todo");
+const {
+  INFOBIP_ENDPOINT,
+  INFOBIP_API_KEY,
+  INFOBIP_SENDER_NUMBER,
+  INFOBIP_RECEIVER_NUMBER,
+} = process.env;
 
 const getAllTodos = (req, res) => {
   const sortOptions = ["DESC", "ASC"];
@@ -34,7 +40,33 @@ const updateTodoById = async (req, res) => {
     .then((todoById) =>
       Todo.update({ done, text }, { where: { id: id } })
         .then(() => {
-          if (done && done !== todoById.done) console.log("Send SMS");
+          if (done && done !== todoById.done)
+            fetch(
+              `https://${INFOBIP_ENDPOINT}.api.infobip.com/sms/2/text/advanced`,
+              {
+                method: "POST",
+                headers: {
+                  Authorization: INFOBIP_API_KEY,
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  messages: [
+                    {
+                      destinations: [
+                        {
+                          to: INFOBIP_SENDER_NUMBER,
+                        },
+                      ],
+                      from: INFOBIP_RECEIVER_NUMBER,
+                      text: `${todoById.text} is done`,
+                    },
+                  ],
+                }),
+              }
+            )
+              .then(() => res.send("Message sent!"))
+              .catch(() => res.send("Message not sent!"));
         })
         .then(() => res.send())
         .catch((reject) => res.send(reject))
