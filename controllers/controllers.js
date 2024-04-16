@@ -55,10 +55,10 @@ const updateTodoById = async (req, res) => {
                     {
                       destinations: [
                         {
-                          to: INFOBIP_SENDER_NUMBER,
+                          to: INFOBIP_RECEIVER_NUMBER,
                         },
                       ],
-                      from: INFOBIP_RECEIVER_NUMBER,
+                      from: INFOBIP_SENDER_NUMBER,
                       text: `${todoById.text} is done`,
                     },
                   ],
