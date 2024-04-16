@@ -13,22 +13,22 @@ const getAllTodos = (req, res) => {
   Todo.findAll({
     order: [["createdAt", sortOptions[Number(sort === "ASC")]]],
   })
-    .then((result) => res.send(result))
-    .catch((reject) => res.send(reject));
+    .then((result) => res.status(200).send(result))
+    .catch((reject) => res.status(500).send(reject));
 };
 
 const getTodoById = (req, res) => {
   const { id } = req.params;
 
   Todo.findByPk(id)
-    .then((todoById) => res.send(todoById))
-    .catch(() => res.send(`Todo with id: ${id} not found!`));
+    .then((todoById) => res.status(200).send(todoById))
+    .catch(() => res.status(500).send(`Todo with id: ${id} not found!`));
 };
 
 const addNewTodo = (req, res) => {
   Todo.create(req.body)
-    .then((result) => res.send(result))
-    .catch((reject) => res.send(reject));
+    .then((result) => res.status(200).send(result))
+    .catch((reject) => res.status(500).send(reject));
 };
 
 const updateTodoById = async (req, res) => {
@@ -65,16 +65,16 @@ const updateTodoById = async (req, res) => {
                 }),
               }
             )
-              .then(() => res.send("Message sent!"))
-              .catch(() => res.send("Message not sent!"));
+              .then(() => res.status(200).send("Message sent!"))
+              .catch(() => res.status(500).send("Message not sent!"));
         })
         .then(() => {
           if (!(done && done !== todoById.done))
-            return res.send(`${todoById.text} successfully updated!`);
+            return res.status(200).send(`${todoById.text} successfully updated!`);
         })
-        .catch((reject) => res.send(reject))
+        .catch((reject) => res.status(500).send(reject))
     )
-    .catch(() => res.send(`Todo with id: ${id} not found!`));
+    .catch(() => res.status(500).send(`Todo with id: ${id} not found!`));
 };
 
 const deleteTodoById = (req, res) => {
@@ -85,8 +85,8 @@ const deleteTodoById = (req, res) => {
       id,
     },
   })
-    .then(() => res.send(`Todo with id: ${id} deleted!`))
-    .catch(() => res.send(`Todo with id: ${id} not found!`));
+    .then(() => res.status(200).send(`Todo with id: ${id} deleted!`))
+    .catch(() => res.status(500).send(`Todo with id: ${id} not found!`));
 };
 
 module.exports = {
