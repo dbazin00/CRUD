@@ -68,7 +68,10 @@ const updateTodoById = async (req, res) => {
               .then(() => res.send("Message sent!"))
               .catch(() => res.send("Message not sent!"));
         })
-        .then(() => res.send())
+        .then(() => {
+          if (!(done && done !== todoById.done))
+            return res.send(`${todoById.text} successfully updated!`);
+        })
         .catch((reject) => res.send(reject))
     )
     .catch(() => res.send(`Todo with id: ${id} not found!`));
